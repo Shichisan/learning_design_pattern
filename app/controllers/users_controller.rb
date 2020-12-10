@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def show
     @user = find_user
 
-    return @user
+    render json: @user
   end
 
   def create
