@@ -22,6 +22,18 @@ class GroupsController < ApplicationController
     head :no_content
   end
 
+  def add_to_group
+    parent_group = Group.find(group_params[:parent_group_id])
+    group = find_group
+    parent_group.add_item(group)
+  end
+
+  def remove_from_group
+    parent_group = Group.find(group_params[:parent_group_id])
+    group = find_group
+    parent_group.remove_from_group(group)
+  end
+
   private
 
   def group_params

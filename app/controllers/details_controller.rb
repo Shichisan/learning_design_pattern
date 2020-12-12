@@ -34,6 +34,22 @@ class DetailsController < ApplicationController
     head :no_content
   end
 
+  def add_to_group
+    group = Group.find(detail_params[:group_id])
+    detail = find_detail
+    group.add_item(detail)
+
+    render json: detail, status: :ok
+  end
+
+  def remove_from_group
+    group = Group.find(detail_params[:group_id])
+    detail = find_detail
+    group.remove_item(detail)
+
+    render json: detail, status: :ok
+  end
+
   private
 
   def detail_params
