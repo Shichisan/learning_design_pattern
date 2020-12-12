@@ -37,7 +37,7 @@ class DetailsController < ApplicationController
   private
 
   def detail_params
-    params.require(:detail).permit(:amount, :category_id, :user_id, :detail_type)
+    params.require(:detail).permit(:amount, :category_id, :user_id, :detail_type, :group_id)
   end
 
   def find_detail
