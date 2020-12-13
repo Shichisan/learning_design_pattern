@@ -21,13 +21,17 @@ class Group < ApplicationRecord
     end
   end
 
+  def get_child(results = {})
+    results[name.to_sym] = details
 
+    children_groups = Group.where(parent_group_id: id)
+    return results if children_groups.size.zero?
+
+    children_groups.each do |group|
+      group.get_child(results)
     end
 
-  def get_child
-    children = {}
-    children[:details] = details
-    children
+    results
   end
 
   def is_most_parent?

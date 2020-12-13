@@ -5,6 +5,13 @@ class GroupsController < ApplicationController
     render json: @groups, status: :ok
   end
 
+  def index_with_details
+    group = find_group
+    @results = group.get_child
+
+    render json: @results, status: :ok
+  end
+
   def create
     group = Group.new(group_params)
     if group.save
