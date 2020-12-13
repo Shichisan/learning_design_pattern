@@ -9,4 +9,8 @@ module ParticularComponent
 
   def get_child
   end
+
+  def accept
+    raise NotImplementedError, "#{self.class} should be implemented #{__method__}"
+  end
 end
