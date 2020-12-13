@@ -35,7 +35,7 @@ class DetailsController < ApplicationController
   end
 
   def add_to_group
-    group = Group.find(detail_params[:group_id])
+    group = find_group
     detail = find_detail
     group.add_item(detail)
 
@@ -43,7 +43,7 @@ class DetailsController < ApplicationController
   end
 
   def remove_from_group
-    group = Group.find(detail_params[:group_id])
+    group = find_group
     detail = find_detail
     group.remove_item(detail)
 
@@ -58,5 +58,9 @@ class DetailsController < ApplicationController
 
   def find_detail
     Detail.find(params[:id])
+  end
+
+  def find_group
+    Group.find(detail_params[:group_id])
   end
 end
