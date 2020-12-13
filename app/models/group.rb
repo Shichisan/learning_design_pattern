@@ -2,6 +2,7 @@ class Group < ApplicationRecord
   include ParticularComponent
 
   validates :name, presence: true
+  validates :user_id, presence: true
 
   has_many :details, dependent: :destroy
 

@@ -1,8 +1,10 @@
 class ReportsController < ApplicationController
   def show
     results = {}
+
     report_visitor = ReportVisitor.new
-    details = Detail.all
+
+    details = Detail.where(user_id: report_params[:user_id])
     details.each do |d|
       d.accept(report_visitor)
     end
@@ -18,5 +20,11 @@ class ReportsController < ApplicationController
     report_visitor.reset
 
     render json: results, status: :ok
+  end
+
+  private
+
+  def report_params
+    params.require(:report).permit(:user_id)
   end
 end
