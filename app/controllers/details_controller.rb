@@ -34,13 +34,33 @@ class DetailsController < ApplicationController
     head :no_content
   end
 
+  def add_to_group
+    group = find_group
+    detail = find_detail
+    group.add_item(detail)
+
+    render json: detail, status: :ok
+  end
+
+  def remove_from_group
+    group = find_group
+    detail = find_detail
+    group.remove_item(detail)
+
+    render json: detail, status: :ok
+  end
+
   private
 
   def detail_params
-    params.require(:detail).permit(:amount, :category_id, :user_id, :detail_type)
+    params.require(:detail).permit(:amount, :category_id, :user_id, :detail_type, :group_id)
   end
 
   def find_detail
     Detail.find(params[:id])
+  end
+
+  def find_group
+    Group.find(detail_params[:group_id])
   end
 end
