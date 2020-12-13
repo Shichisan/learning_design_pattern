@@ -34,7 +34,7 @@ class Group < ApplicationRecord
     results
   end
 
-  def is_most_parent?
-    parent_group_id == nil
+  def accept(visitor)
+    visitor.visit_group(self)
   end
 end
