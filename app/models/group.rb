@@ -5,13 +5,11 @@ class Group < ApplicationRecord
 
   has_many :details, dependent: :destroy
 
-  def add_item(item, parent_id = nil)
+  def add_item(item)
     if item.class == Detail
       item.add_item(self)
     elsif item.class == Group
-      return if parent_id.blank?
-
-      update(parent_group_id: parent_id)
+      item.update(parent_group_id: self.id)
     end
   end
 
@@ -19,17 +17,12 @@ class Group < ApplicationRecord
     if item.class == Detail
       item.remove_item
     elsif item.class == Group
-      if is_most_parent?
-        item.parent_group_id = nil
-        item.save
-
-        return
-      end
-
-      item.parent_group_id = parent_group_id
-      item.save
+      item.update(parent_group_id: parent_group_id)
     end
   end
+
+
+    end
 
   def get_child
     children = {}
