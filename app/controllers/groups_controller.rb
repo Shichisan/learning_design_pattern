@@ -32,12 +32,16 @@ class GroupsController < ApplicationController
     parent_group = Group.find(group_params[:parent_group_id])
     group = find_group
     parent_group.add_item(group)
+
+    render json: group, status: :ok
   end
 
   def remove_from_group
     parent_group = Group.find(group_params[:parent_group_id])
     group = find_group
-    parent_group.remove_from_group(group)
+    parent_group.remove_item(group)
+
+    render json: group, status: :ok
   end
 
   private
