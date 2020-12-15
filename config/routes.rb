@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: %w(show create update destroy)
   resources :details, only: %w(index show create update destroy)
   resources :groups, only: %w(index create update destroy)
+  get 'report', to: 'reports#show'
   put 'details/:id/add_to_group', to: 'details#add_to_group'
   put 'details/:id/remove_from_group', to: 'details#remove_from_group'
   get 'groups/:id/all_child_details', to: 'groups#index_with_details'

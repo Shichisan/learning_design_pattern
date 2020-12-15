@@ -19,4 +19,8 @@ class Detail < ApplicationRecord
     self.group = nil
     save
   end
+
+  def accept(visitor)
+    visitor.visit_detail(self)
+  end
 end

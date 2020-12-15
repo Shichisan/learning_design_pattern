@@ -2,6 +2,7 @@ class Group < ApplicationRecord
   include ParticularComponent
 
   validates :name, presence: true
+  validates :user_id, presence: true
 
   has_many :details, dependent: :destroy
 
@@ -34,7 +35,7 @@ class Group < ApplicationRecord
     results
   end
 
-  def is_most_parent?
-    parent_group_id == nil
+  def accept(visitor)
+    visitor.visit_group(self)
   end
 end
